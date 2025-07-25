@@ -4,7 +4,7 @@ Integer array and Print Those values*/
 #include <stdio.h>
 void inputArray(int a[], int size)
 {
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < size; i++)
     {
         printf("Enter The Value Of a[%d] ", i);
         scanf("%d", &a[i]);
@@ -13,7 +13,7 @@ void inputArray(int a[], int size)
 void printArray(int a[], int size)
 {
     // Print the Array
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < size; i++)
     {
         printf("The [%d]th Value Of a is %d \n", i, a[i]);
     }
@@ -22,7 +22,7 @@ void printArray(int a[], int size)
 int addArray(int a[], int size)
 {
     int sum = 0;
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < size; i++)
     {
         sum += a[i];
     }
@@ -40,16 +40,62 @@ int search(int *nums, int numsSize, int target)
     }
     return -1;
 }
+// Bubble Sort
+void bubbleSort(int a[], int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = 0; j < size - i - 1; j++)
+        {
+            if (a[j] > a[j + 1])
+            {
+                int temp = a[j];
+                a[j] = a[j + 1];
+                a[j + 1] = temp;
+            }
+        }
+    }
+}
+
+int deletePosition(int a[], int size, int pos)
+{
+
+    for (int i = pos; i < size - 1; i++)
+    {
+        a[i] = a[i + 1];
+    }
+    size--;
+    return size;
+}
+// Write a Function to insert A value at given position
+int insertPosition(int a[], int size, int pos, int val)
+{
+    for (int i = size - 1; i >= pos; i--)
+    {
+        a[i + 1] = a[i];
+    }
+    a[pos] = val;
+    size++;
+    return size;
+}
+
 int main()
 {
-    int a[5] = {23, 34, 45, 56, 67};
-    printArray(a, 5);
-    printf("\n");
-    printf("The Item is Found at Index %d ", search(a, 5, 45));
-    printf("\n");
-    // printf("The Sum of Array is %d", addArray(a, 5));
-    printf("\n");
-    // inputArray(a, 5);
-    // printArray(a, 5);
+    int size;
+    // Unsorted array
+    printf("Enter the Size of Arrar \n");
+    scanf("%d", &size);
+    int a[size];
+    inputArray(a, size);
+    printf("The Unsorted Array As Follows \n");
+    printArray(a, size);
+    // printf("The Sorted Array As Follows \n");
+    // bubbleSort(a, size);
+    // printArray(a, size);
+    // // size = deletePosition(a, size, 2);
+    // printArray(a, size);
+    size = insertPosition(a, 3, 2, 999);
+    printArray(a, size);
+
     return 0;
 }
